@@ -17,7 +17,7 @@ builder.Services.AddDbContext<PostgresDbContext>(options =>
         config.ConnectionString,
         options =>
         {
-            options.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "vineyards");
+            options.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "vineyards"); // Si se modifica hay que cambiarlo también en PostgresDbContext
             options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
             options.CommandTimeout(1500);
             options.EnableRetryOnFailure();

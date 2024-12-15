@@ -49,7 +49,7 @@ namespace Visiotech_API.Controllers
         }
 
         [HttpPost("managers/totalarea")]
-        public async Task<ActionResult<Dictionary<string, int>>> GetTotalAreaByManager()
+        public async Task<ActionResult<Dictionary<string, double>>> GetTotalAreaByManager()
         {
             try
             {

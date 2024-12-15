@@ -14,7 +14,7 @@ namespace Visiotech_API.Controllers
         private readonly ILogger<GrapesController> _logger = logger;
 
         [HttpPost("grapes/area")]
-        public async Task<ActionResult<Dictionary<string, int>>> GetTotalAreaByGrape()
+        public async Task<ActionResult<Dictionary<string, double>>> GetTotalAreaByGrape()
         {
             try 
             {

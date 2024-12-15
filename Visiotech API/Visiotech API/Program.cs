@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Visiotech_API.Data;
 using Visiotech_API.Extensions;
+using Visiotech_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<PostgresDbContext>(options =>
             options.EnableRetryOnFailure();
         });
 });
+
+builder.Services.AddScoped<VisiotechService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

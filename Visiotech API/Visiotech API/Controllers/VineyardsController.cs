@@ -1,31 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Visiotech_API.Data;
+using Visiotech_API.Services;
 
 namespace Visiotech_API.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class VineyardsController(PostgresDbContext context, ILogger<VineyardsController> logger) : ControllerBase
+    public class VineyardsController(VisiotechService service, ILogger<VineyardsController> logger) : ControllerBase
     {
-        private readonly PostgresDbContext _context = context;
+        private readonly VisiotechService _service = service;
         private readonly ILogger<VineyardsController> _logger = logger;
 
         [HttpPost("vineyards/managers")]
-        public async Task<ActionResult<Dictionary<string, int>>> GetManagersByVineyard()
+        public async Task<ActionResult<Dictionary<string, List<string>>>> GetManagersByVineyard()
         {
             try
             {
-                var result = await _context.Vineyards
-                    .Include(v => v.Parcels)
-                        .ThenInclude(p => p.Manager)
-                    .Select(v => new 
-                    { 
-                        VineyardName = v.Name, 
-                        ManagerNames = v.Parcels.Select(p => p.Manager.Name).Distinct().OrderBy(n => n).ToList() 
-                    }).ToDictionaryAsync(v => v.VineyardName, v => v.ManagerNames); 
-                
-                return Ok(result);
+                var result = await _service.GetManagersByVineyard();
+                return result != null ? 
+                    Ok(result) : 
+                    NoContent();
             }
             catch (Exception ex)
             {

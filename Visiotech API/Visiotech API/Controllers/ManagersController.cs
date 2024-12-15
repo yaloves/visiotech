@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using Visiotech_API.Data;
+using Visiotech_API.Services;
 
 namespace Visiotech_API.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class ManagersController(PostgresDbContext context, ILogger<ManagersController> logger) : ControllerBase
+    public class ManagersController(VisiotechService service, ILogger<ManagersController> logger) : ControllerBase
     {
-        private readonly PostgresDbContext _context = context;
+        private readonly VisiotechService _service = service;
         private readonly ILogger<ManagersController> _logger = logger;
 
         [HttpGet("managers/ids")]
@@ -16,12 +18,14 @@ namespace Visiotech_API.Controllers
         {
             try
             {
-                var ids = await _context.Managers.Select(m => m.TaxNumber).ToListAsync();
-                return Ok(ids);
+                var result = await _service.GetManagerIds();
+                return result != null ?
+                    Ok(result) :
+                    NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "GetManagersTaxNumbersSorted error");
+                _logger.LogError(ex, "GetManagerIds error");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
@@ -32,11 +36,10 @@ namespace Visiotech_API.Controllers
         {
             try
             {
-                var managers = _context.Managers.AsQueryable();
-                if (sorted)
-                    managers = managers.OrderBy(m => m.Name);
-                var taxNumbers = await managers.Select(m => m.TaxNumber).ToListAsync();
-                return Ok(taxNumbers);
+                var result = await _service.GetManagersTaxNumbersSorted(sorted);
+                return result != null ?
+                    Ok(result) :
+                    NoContent();
             }
             catch (Exception ex)
             {
@@ -50,12 +53,10 @@ namespace Visiotech_API.Controllers
         {
             try
             {
-                var result = await _context.Managers
-                    .Include(m => m.Parcels)
-                    .Select(m => new { ManagerName = m.Name, TotalArea = m.Parcels.Sum(p => p.Area) })
-                    .ToDictionaryAsync(m => m.ManagerName, m => m.TotalArea);
-
-                return Ok(result);
+                var result = await _service.GetTotalAreaByManager();
+                return result != null ?
+                    Ok(result) :
+                    NoContent();
             }
             catch (Exception ex)
             {

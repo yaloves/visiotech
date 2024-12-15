@@ -2,15 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Visiotech_API.Data;
 using Visiotech_API.Extensions;
+using Visiotech_API.Models;
 using Visiotech_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+AppConfiguration config = new(builder.Configuration);
+builder.Services.AddSingleton(config);
+
 builder.Services.AddDbContext<PostgresDbContext>(options =>
 {
     options.UseNpgsql(
-        "Host=postgres_db;Database=visiotech;Username=user;Password=Bz3kW.AJT7MV8t@",
+        config.ConnectionString,
         options =>
         {
             options.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "vineyards");
@@ -20,7 +24,7 @@ builder.Services.AddDbContext<PostgresDbContext>(options =>
         });
 });
 
-builder.Services.AddScoped<IVisiotechService>();
+builder.Services.AddScoped<IVisiotechService, VisiotechService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

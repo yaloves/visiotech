@@ -8,9 +8,9 @@ namespace Visiotech_API.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class GrapesController(VisiotechService service, ILogger<GrapesController> logger) : ControllerBase
+    public class GrapesController(IVisiotechService service, ILogger<GrapesController> logger) : ControllerBase
     {
-        private readonly VisiotechService _service = service;
+        private readonly IVisiotechService _service = service;
         private readonly ILogger<GrapesController> _logger = logger;
 
         [HttpPost("grapes/area")]
@@ -18,7 +18,7 @@ namespace Visiotech_API.Controllers
         {
             try 
             {
-                var result = await _service.GetManagersByVineyard();
+                var result = await _service.GetTotalAreaByGrape();
                 return result != null ?
                     Ok(result) :
                     NoContent();

@@ -7,9 +7,9 @@ namespace Visiotech_API.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class VineyardsController(VisiotechService service, ILogger<VineyardsController> logger) : ControllerBase
+    public class VineyardsController(IVisiotechService service, ILogger<VineyardsController> logger) : ControllerBase
     {
-        private readonly VisiotechService _service = service;
+        private readonly IVisiotechService _service = service;
         private readonly ILogger<VineyardsController> _logger = logger;
 
         [HttpPost("vineyards/managers")]

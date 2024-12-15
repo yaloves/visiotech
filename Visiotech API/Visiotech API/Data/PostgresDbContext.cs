@@ -6,11 +6,6 @@ namespace Visiotech_API.Data
 {
     public class PostgresDbContext(DbContextOptions<PostgresDbContext> options) : DbContext(options)
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=postgres_db;Database=visiotech;Username=user;Password=Bz3kW.AJT7MV8t@");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

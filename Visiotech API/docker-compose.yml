@@ -6,7 +6,8 @@ services:
       context: .
       dockerfile: Visiotech API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIROMENT=Development
+      ASPNETCORE_ENVIROMENT: Development
+      DB_CONNECTIONSTRING: "${DB_CONNECTIONSTRING}"
     ports:
       - "8000:8000"
     networks:

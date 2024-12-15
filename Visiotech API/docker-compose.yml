@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: Bz3kW.AJT7MV8t@
-      POSTGRES_BD: bd
+      POSTGRES_BD: visiotech
     networks:
       - app
 

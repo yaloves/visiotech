@@ -9,5 +9,8 @@
         public Guid ManagerEntityId { get; set; }
         public Guid VineyardEntityId { get; set; }
         public Guid GrapeEntityId { get; set; }
+        public ManagerEntity Manager { get; set; } = null!;
+        public GrapeEntity Grape { get; set; } = null!;
+        public VineyardEntity Vineyard { get; set; } = null!;
     }
 }

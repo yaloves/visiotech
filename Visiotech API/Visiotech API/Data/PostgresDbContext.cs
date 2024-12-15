@@ -8,13 +8,28 @@ namespace Visiotech_API.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=postgres_db;Database=db;Username=user;Password=Bz3kW.AJT7MV8t@");
+            optionsBuilder.UseNpgsql("Host=postgres_db;Database=visiotech;Username=user;Password=Bz3kW.AJT7MV8t@");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasDefaultSchema("vineyard");
+            modelBuilder.HasDefaultSchema("vineyards");
+
+            modelBuilder.Entity<ParcelEntity>()
+                .HasOne(p => p.Manager)
+                .WithMany(m => m.Parcels)
+                .HasForeignKey(p => p.ManagerEntityId); 
+            
+            modelBuilder.Entity<ParcelEntity>()
+                .HasOne(p => p.Grape)
+                .WithMany(g => g.Parcels)
+                .HasForeignKey(p => p.GrapeEntityId); 
+            
+            modelBuilder.Entity<ParcelEntity>()
+                .HasOne(p => p.Vineyard)
+                .WithMany(v => v.Parcels)
+                .HasForeignKey(p => p.VineyardEntityId);
         }
 
         public virtual DbSet<ManagerEntity> Managers { get; set; } = null!;

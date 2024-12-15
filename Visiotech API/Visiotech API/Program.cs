@@ -20,7 +20,7 @@ builder.Services.AddDbContext<PostgresDbContext>(options =>
         });
 });
 
-builder.Services.AddScoped<VisiotechService>();
+builder.Services.AddScoped<IVisiotechService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

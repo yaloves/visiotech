@@ -8,9 +8,9 @@ namespace Visiotech_API.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class ManagersController(VisiotechService service, ILogger<ManagersController> logger) : ControllerBase
+    public class ManagersController(IVisiotechService service, ILogger<ManagersController> logger) : ControllerBase
     {
-        private readonly VisiotechService _service = service;
+        private readonly IVisiotechService _service = service;
         private readonly ILogger<ManagersController> _logger = logger;
 
         [HttpGet("managers/ids")]

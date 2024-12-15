@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visiotech API", "Visiotech 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A8DB5345-FEFC-4AA7-B46F-E96840BEF7BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visiotech API Tests", "..\Visiotech API Tests\Visiotech API Tests.csproj", "{129E32EA-5F68-40FA-9B05-9B2856DDE66D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A8DB5345-FEFC-4AA7-B46F-E96840BEF7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8DB5345-FEFC-4AA7-B46F-E96840BEF7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8DB5345-FEFC-4AA7-B46F-E96840BEF7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129E32EA-5F68-40FA-9B05-9B2856DDE66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129E32EA-5F68-40FA-9B05-9B2856DDE66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129E32EA-5F68-40FA-9B05-9B2856DDE66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129E32EA-5F68-40FA-9B05-9B2856DDE66D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
